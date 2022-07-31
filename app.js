@@ -1,7 +1,7 @@
+import 'dotenv/config'
+import './db/connect.js'
 import express from 'express'
 import cors from 'cors'
-import './config.js'
-import './db/connect.js'
 import { upload } from './storage/index.js'
 import userRoutes from './routers/user.js'
 import postRoutes from './routers/post.js'
@@ -16,10 +16,7 @@ app.use(postRoutes)
 
 // need add auth
 app.post('/upload', upload.single('image'), (req, res) => {
-  res.json({
-    ok: true,
-    url: `/uploads/${req.file.originalname}`,
-  })
+  res.json({ ok: true, url: `/uploads/${req.file.originalname}` })
 })
 
 app.get('/', (_, res) => res.status(200).send('hello gusi :D'))
